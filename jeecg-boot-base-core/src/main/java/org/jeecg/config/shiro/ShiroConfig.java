@@ -106,6 +106,14 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/sys/getQrcodeToken/**", "anon"); //监听扫码
         filterChainDefinitionMap.put("/sys/checkAuth", "anon"); //授权接口排除
 
+        //放开android端所有的接口
+        filterChainDefinitionMap.put("/book/hnBook/list", "anon"); //授权接口列表
+        filterChainDefinitionMap.put("/book/hnBook/add", "anon"); //授权接口添加
+        filterChainDefinitionMap.put("/book/hnBook/edit", "anon"); //授权接口编辑
+        filterChainDefinitionMap.put("/book/hnBook/delete", "anon"); //授权接口排除
+        filterChainDefinitionMap.put("/book/hnBook/deleteBatch", "anon"); //授权接口批量排除
+        filterChainDefinitionMap.put("/book/hnBook/queryById", "anon"); //授权接口详情查找
+
 
         //update-begin--Author:scott Date:20221116 for：排除静态资源后缀
         filterChainDefinitionMap.put("/", "anon");
