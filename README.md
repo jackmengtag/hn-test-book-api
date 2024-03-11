@@ -236,7 +236,7 @@ Star走势图
 
 - 缓存：Redis
 
-- 数据库脚本：MySQL5.7+  &  Oracle 11g & Sqlserver2017（其他数据库，[需要自己转](https://my.oschina.net/jeecg/blog/4905722)）
+- 数据库脚本：MySQL8+  hd-test.sql
 
 
 #### 后端
