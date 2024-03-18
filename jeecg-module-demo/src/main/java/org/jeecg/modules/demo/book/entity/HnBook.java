@@ -77,4 +77,5 @@ public class HnBook implements Serializable {
 	@Excel(name = "书名", width = 15)
     @ApiModelProperty(value = "书名")
     private java.lang.String bookname;
+
 }

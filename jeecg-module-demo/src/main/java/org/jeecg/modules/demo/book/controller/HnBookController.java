@@ -1,6 +1,7 @@
 package org.jeecg.modules.demo.book.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.demo.book.bean.BookRequestParam;
 import org.jeecg.modules.demo.book.entity.HnBook;
 import org.jeecg.modules.demo.book.service.IHnBookService;
 
@@ -54,24 +56,33 @@ public class HnBookController extends JeecgController<HnBook, IHnBookService> {
 	/**
 	 * 分页列表查询
 	 *
-	 * @param hnBook
-	 * @param pageNo
-	 * @param pageSize
-	 * @param req
+	 * @param param
+	 *
 	 * @return
 	 */
 	//@AutoLog(value = "书籍-分页列表查询")
 	@ApiOperation(value="书籍-分页列表查询", notes="书籍-分页列表查询")
-	@GetMapping(value = "/list")
-	public Result<IPage<HnBook>> queryPageList(HnBook hnBook,
-								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-								   HttpServletRequest req) {
-		QueryWrapper<HnBook> queryWrapper = QueryGenerator.initQueryWrapper(hnBook, req.getParameterMap());
-		Page<HnBook> page = new Page<HnBook>(pageNo, pageSize);
+	@PostMapping(value = "/bookList")
+	public Result<IPage<HnBook>> queryBookPageList(@RequestBody BookRequestParam param) {
+		Map<String, String[]> map=new HashMap<>();
+		HnBook hnBook=new HnBook();
+		QueryWrapper<HnBook> queryWrapper = QueryGenerator.initQueryWrapper(hnBook, map);
+		Page<HnBook> page = new Page<HnBook>(param.getPageNo(), param.getPageSize());
 		IPage<HnBook> pageList = hnBookService.page(page, queryWrapper);
 		return Result.OK(pageList);
 	}
+
+	 @ApiOperation(value="书籍-分页列表查询", notes="书籍-分页列表查询")
+	 @GetMapping(value = "/list")
+	 public Result<IPage<HnBook>> queryPageList(HnBook hnBook,
+												@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+												@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
+												HttpServletRequest req) {
+		 QueryWrapper<HnBook> queryWrapper = QueryGenerator.initQueryWrapper(hnBook, req.getParameterMap());
+		 Page<HnBook> page = new Page<HnBook>(pageNo, pageSize);
+		 IPage<HnBook> pageList = hnBookService.page(page, queryWrapper);
+		 return Result.OK(pageList);
+	 }
 	
 	/**
 	 *   添加
@@ -81,7 +92,7 @@ public class HnBookController extends JeecgController<HnBook, IHnBookService> {
 	 */
 	@AutoLog(value = "书籍-添加")
 	@ApiOperation(value="书籍-添加", notes="书籍-添加")
-	@RequiresPermissions("book:hn_book:add")
+//	@RequiresPermissions("book:hn_book:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody HnBook hnBook) {
 		hnBookService.save(hnBook);
@@ -96,7 +107,7 @@ public class HnBookController extends JeecgController<HnBook, IHnBookService> {
 	 */
 	@AutoLog(value = "书籍-编辑")
 	@ApiOperation(value="书籍-编辑", notes="书籍-编辑")
-	@RequiresPermissions("book:hn_book:edit")
+//	@RequiresPermissions("book:hn_book:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody HnBook hnBook) {
 		hnBookService.updateById(hnBook);

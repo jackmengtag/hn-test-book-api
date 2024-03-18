@@ -113,6 +113,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/book/hnBook/delete", "anon"); //授权接口排除
         filterChainDefinitionMap.put("/book/hnBook/deleteBatch", "anon"); //授权接口批量排除
         filterChainDefinitionMap.put("/book/hnBook/queryById", "anon"); //授权接口详情查找
+        filterChainDefinitionMap.put("/book/hnBook/bookList", "anon"); //授权接口详情查找
+        filterChainDefinitionMap.put("/jeecg-boot/book/hnBook/bookList", "anon"); //授权接口详情查找
+        filterChainDefinitionMap.put("/jeecg-boot/book/hnBook/list", "anon"); //授权接口详情查找
 
 
         //update-begin--Author:scott Date:20221116 for：排除静态资源后缀
