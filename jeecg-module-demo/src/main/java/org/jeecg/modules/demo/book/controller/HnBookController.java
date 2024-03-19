@@ -69,7 +69,9 @@ public class HnBookController extends JeecgController<HnBook, IHnBookService> {
 		QueryWrapper<HnBook> queryWrapper = QueryGenerator.initQueryWrapper(hnBook, map);
 		Page<HnBook> page = new Page<HnBook>(param.getPageNo(), param.getPageSize());
 		IPage<HnBook> pageList = hnBookService.page(page, queryWrapper);
-		return Result.OK(pageList);
+		Result result=Result.OK(pageList);
+		result.setState(200);
+		return result;
 	}
 
 	 @ApiOperation(value="书籍-分页列表查询", notes="书籍-分页列表查询")
